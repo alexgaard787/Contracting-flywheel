@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Contractor Equity Flywheel Pitch Partner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="description" content="Pitch tool for converting contractors into equity partners via the Contractor Equity Flywheel.">
+
+<!-- iOS / PWA -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Equity Flywheel">
+<meta name="theme-color" content="#0B132B">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B132B'/%3E%3Ctext x='50' y='65' font-size='55' text-anchor='middle' fill='%2310B981' font-family='Arial' font-weight='bold'%3E%E2%9A%92%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B132B'/%3E%3Ctext x='50' y='65' font-size='55' text-anchor='middle' fill='%2310B981' font-family='Arial' font-weight='bold'%3E%E2%9A%92%3C/text%3E%3C/svg%3E">
+
+<!-- Inline Web App Manifest -->
+<link rel="manifest" href='data:application/manifest+json,{
+  "name": "Contractor Equity Flywheel Pitch Partner",
+  "short_name": "Equity Flywheel",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "%230B132B",
+  "theme_color": "%230B132B",
+  "icons": []
+}'>
+
+<!-- CDNs -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+  :root{
+    --navy-deep:#0B132B;
+    --navy:#1C2541;
+    --emerald:#10B981;
+    --amber:#F59E0B;
+    --trust:#3B82F6;
+    --slate:#94A3B8;
+  }
+  *{-webkit-tap-highlight-color:transparent;}
+  html,body{
+    background:var(--navy-deep);
+    font-family:'Inter',sans-serif;
+    color:#E2E8F0;
+    overscroll-behavior:none;
+  }
+  body{
+    padding-bottom: calc(env(safe-area-inset-bottom) + 80px);
+    background-image:
+      radial-gradient(circle at 20% 0%, rgba(16,185,129,0.12), transparent 40%),
+      radial-gradient(circle at 100% 30%, rgba(59,130,246,0.10), transparent 45%);
+  }
+  .safe-top{ padding-top: env(safe-area-inset-top); }
+
+  .glass{
+    background: rgba(28,37,65,0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(148,163,184,0.15);
+  }
+  .glass-strong{
+    background: rgba(11,19,43,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(148,163,184,0.18);
+  }
+  .grad-text{
+    background: linear-gradient(90deg,#10B981,#3B82F6);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .grad-text-amber{
+    background: linear-gradient(90deg,#F59E0B,#10B981);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .glow-emerald{ box-shadow: 0 0 24px rgba(16,185,129,0.35); }
+  .glow-amber{ box-shadow: 0 0 24px rgba(245,158,11,0.30); }
+  .glow-trust{ box-shadow: 0 0 24px rgba(59,130,246,0.30); }
+
+  .btn-primary{
+    background: linear-gradient(135deg,#10B981,#0d9668);
+    box-shadow: 0 8px 24px rgba(16,185,129,0.35);
+  }
+  .btn-primary:active{ transform: scale(0.97); }
+  .btn-secondary{
+    background: rgba(59,130,246,0.15);
+    border: 1px solid rgba(59,130,246,0.4);
+  }
+  .btn-secondary:active{ transform: scale(0.97); }
+
+  /* Custom touch-friendly sliders */
+  input[type=range]{
+    -webkit-appearance:none;
+    appearance:none;
+    width:100%;
+    height:8px;
+    border-radius:999px;
+    background: linear-gradient(90deg, var(--emerald) var(--fill,50%), rgba(148,163,184,0.2) var(--fill,50%));
+    outline:none;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background: #fff;
+    border: 4px solid var(--emerald);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    cursor:pointer;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:#fff;
+    border:4px solid var(--emerald);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    cursor:pointer;
+  }
+  .step-btn{
+    width:40px;height:40px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:12px;
+    background: rgba(148,163,184,0.1);
+    border:1px solid rgba(148,163,184,0.2);
+  }
+  .step-btn:active{ background: rgba(16,185,129,0.25); }
+
+  .tab-item.active .tab-icon{ color: var(--emerald); }
+  .tab-item.active .tab-label{ color: var(--emerald); }
+
+  .modal-backdrop{
+    background: rgba(2,6,16,0.75);
+    backdrop-filter: blur(4px);
+  }
+
+  #toast{
+    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), opacity 0.3s ease;
+  }
+
+  .section-anchor{ scroll-margin-top: 90px; }
+
+  ::-webkit-scrollbar{ width:0; height:0; }
+
+  @keyframes pulseGlow{
+    0%,100%{ box-shadow:0 0 0px rgba(16,185,129,0.4); }
+    50%{ box-shadow:0 0 22px rgba(16,185,129,0.55); }
+  }
+  .pulse-glow{ animation: pulseGlow 2.4s ease-in-out infinite; }
+
+  .fade-up{ animation: fadeUp 0.5s ease both; }
+  @keyframes fadeUp{
+    from{ opacity:0; transform: translateY(14px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- ===================== HEADER ===================== -->
+<header class="fixed top-0 inset-x-0 z-40 glass-strong safe-top">
+  <div class="max-w-2xl mx-auto flex items-center justify-between px-4 py-3">
+    <div class="flex items-center gap-2">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 flex items-center justify-center glow-emerald">
+        <i class="fa-solid fa-arrows-spin text-white text-sm"></i>
+      </div>
+      <div class="leading-tight">
+        <p class="text-[10px] tracking-widest text-slate-400 font-semibold uppercase">Equity Flywheel</p>
+        <p class="text-sm font-bold text-white">Pitch Partner</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="openModal('shareModal')" class="btn-secondary w-10 h-10 rounded-full flex items-center justify-center text-blue-300">
+        <i class="fa-solid fa-share-nodes"></i>
+      </button>
+      <button onclick="handleInstall()" class="btn-primary w-10 h-10 rounded-full flex items-center justify-center text-white">
+        <i class="fa-solid fa-download"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== MAIN ===================== -->
+<main class="max-w-2xl mx-auto px-4 pt-24">
+
+  <!-- HERO -->
+  <section id="hero" class="section-anchor pt-4 pb-8">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass mb-4">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-glow"></span>
+      <span class="text-xs font-semibold text-emerald-300 uppercase tracking-wide">Contractor Equity Program</span>
+    </div>
+    <h1 class="text-3xl font-extrabold leading-tight text-white mb-3">
+      Stop Trading Time for <span class="grad-text-amber">Slim Margins</span>.<br>
+      Build Real Estate <span class="grad-text">Equity</span>.
+    </h1>
+    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+      A partnership model where contractors get paid <strong class="text-white">at cost</strong>, keep every dollar
+      of labor margin as <strong class="text-emerald-400">sweat equity</strong>, and graduate into direct
+      property ownership &mdash; with zero out-of-pocket capital risk.
+    </p>
+
+    <div class="flex flex-col gap-3 mb-6">
+      <button onclick="openModal('shareModal')" class="btn-primary w-full py-4 rounded-2xl text-white font-bold flex items-center justify-center gap-2">
+        <i class="fa-solid fa-paper-plane"></i> Send Pitch to Contractor
+      </button>
+      <button onclick="openQrModal()" class="btn-secondary w-full py-4 rounded-2xl text-blue-300 font-bold flex items-center justify-center gap-2">
+        <i class="fa-solid fa-qrcode"></i> Show In-Person QR Code
+      </button>
+    </div>
+
+    <div class="grid grid-cols-3 gap-2">
+      <div class="glass rounded-2xl p-3 text-center fade-up">
+        <i class="fa-solid fa-shield-halved text-emerald-400 text-xl mb-2"></i>
+        <p class="text-[11px] font-semibold text-white leading-tight">0% Out-of-Pocket Risk</p>
+      </div>
+      <div class="glass rounded-2xl p-3 text-center fade-up">
+        <i class="fa-solid fa-layer-group text-amber-400 text-xl mb-2"></i>
+        <p class="text-[11px] font-semibold text-white leading-tight">Double Payout</p>
+      </div>
+      <div class="glass rounded-2xl p-3 text-center fade-up">
+        <i class="fa-solid fa-house-chimney text-blue-400 text-xl mb-2"></i>
+        <p class="text-[11px] font-semibold text-white leading-tight">Ownership Path</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section id="vsmodel" class="section-anchor py-8">
+    <h2 class="text-xl font-bold text-white mb-1">Old Way vs. Equity Model</h2>
+    <p class="text-slate-400 text-xs mb-4">Same swing of the hammer. Very different outcome.</p>
+
+    <div class="grid grid-cols-1 gap-4">
+      <!-- Old way -->
+      <div class="glass rounded-2xl p-5 border-l-4 border-l-slate-500">
+        <div class="flex items-center gap-2 mb-3">
+          <i class="fa-solid fa-hammer text-slate-400"></i>
+          <h3 class="font-bold text-slate-300">Standard Contractor Job</h3>
+        </div>
+        <ul class="space-y-2 text-sm text-slate-400">
+          <li class="flex gap-2"><i class="fa-solid fa-xmark text-red-400 mt-1"></i> Slim 15&ndash;20% margins on labor</li>
+          <li class="flex gap-2"><i class="fa-solid fa-xmark text-red-400 mt-1"></i> Cash-flow risk carrying material costs</li>
+          <li class="flex gap-2"><i class="fa-solid fa-xmark text-red-400 mt-1"></i> Heavy 15.3% SECA self-employment tax</li>
+          <li class="flex gap-2"><i class="fa-solid fa-xmark text-red-400 mt-1"></i> Zero long-term wealth or ownership</li>
+        </ul>
+      </div>
+
+      <!-- Equity model -->
+      <div class="glass rounded-2xl p-5 border-l-4 border-l-emerald-500 glow-emerald">
+        <div class="flex items-center gap-2 mb-3">
+          <i class="fa-solid fa-seedling text-emerald-400"></i>
+          <h3 class="font-bold text-white">Equity Flywheel Partnership</h3>
+        </div>
+        <ul class="space-y-2 text-sm text-slate-200">
+          <li class="flex gap-2"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> 100% cost coverage &mdash; billed at-cost, no cash risk</li>
+          <li class="flex gap-2"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> Class B sweat-equity units on every deal</li>
+          <li class="flex gap-2"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> Tax-deferred payout via refinance debt, not income</li>
+          <li class="flex gap-2"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> Graduates to direct owner after Deal 3</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRO FORMA CALCULATOR -->
+  <section id="proforma" class="section-anchor py-8">
+    <h2 class="text-xl font-bold text-white mb-1">Interactive Pro-Forma Calculator</h2>
+    <p class="text-slate-400 text-xs mb-5">Drag the sliders to model any deal, live.</p>
+
+    <div class="glass rounded-2xl p-5 space-y-5">
+
+      <!-- Purchase Price -->
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <label class="text-sm font-semibold text-slate-200">Purchase Price</label>
+          <span id="purchasePriceLabel" class="text-sm font-bold text-emerald-400">$180,000</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="step-btn text-slate-300" onclick="step('purchasePrice',-5000)"><i class="fa-solid fa-minus"></i></button>
+          <input type="range" id="purchasePrice" min="100000" max="400000" step="5000" value="180000" oninput="calc()">
+          <button class="step-btn text-slate-300" onclick="step('purchasePrice',5000)"><i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+
+      <!-- Rehab Cost -->
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <label class="text-sm font-semibold text-slate-200">Rehab Direct Cost</label>
+          <span id="rehabCostLabel" class="text-sm font-bold text-emerald-400">$80,000</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="step-btn text-slate-300" onclick="step('rehabCost',-2500)"><i class="fa-solid fa-minus"></i></button>
+          <input type="range" id="rehabCost" min="30000" max="200000" step="2500" value="80000" oninput="calc()">
+          <button class="step-btn text-slate-300" onclick="step('rehabCost',2500)"><i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+
+      <!-- ARV -->
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <label class="text-sm font-semibold text-slate-200">After-Repair Value (ARV)</label>
+          <span id="arvLabel" class="text-sm font-bold text-emerald-400">$360,000</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="step-btn text-slate-300" onclick="step('arv',-5000)"><i class="fa-solid fa-minus"></i></button>
+          <input type="range" id="arv" min="200000" max="700000" step="5000" value="360000" oninput="calc()">
+          <button class="step-btn text-slate-300" onclick="step('arv',5000)"><i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+
+      <!-- Equity Share -->
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <label class="text-sm font-semibold text-slate-200">Contractor Equity Share</label>
+          <span id="equityShareLabel" class="text-sm font-bold text-amber-400">25%</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="step-btn text-slate-300" onclick="step('equityShare',-1)"><i class="fa-solid fa-minus"></i></button>
+          <input type="range" id="equityShare" min="10" max="40" step="1" value="25" oninput="calc()">
+          <button class="step-btn text-slate-300" onclick="step('equityShare',1)"><i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+
+      <hr class="border-slate-700/50">
+
+      <!-- Outputs -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="rounded-xl bg-slate-800/40 p-3">
+          <p class="text-[10px] uppercase tracking-wide text-slate-400 font-semibold mb-1">Standard 15% Job Margin</p>
+          <p id="standardMargin" class="text-lg font-bold text-white">$0</p>
+          <p class="text-[11px] text-slate-500 mt-1">Taxable profit</p>
+        </div>
+        <div class="rounded-xl bg-slate-800/40 p-3">
+          <p class="text-[10px] uppercase tracking-wide text-slate-400 font-semibold mb-1">After-Tax (~30% SECA+Inc)</p>
+          <p id="standardAfterTax" class="text-lg font-bold text-red-300">$0</p>
+          <p class="text-[11px] text-slate-500 mt-1">Take-home cash</p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-gradient-to-br from-emerald-900/40 to-blue-900/30 border border-emerald-500/30 p-4 space-y-3">
+        <p class="text-xs font-bold text-emerald-300 uppercase tracking-wide flex items-center gap-2">
+          <i class="fa-solid fa-bolt"></i> Equity Model Results
+        </p>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <p class="text-[10px] text-slate-400 font-semibold">Refinance Cash-Out</p>
+            <p id="refiCashOut" class="text-lg font-bold text-white">$0</p>
+          </div>
+          <div>
+            <p class="text-[10px] text-slate-400 font-semibold">Retained Equity</p>
+            <p id="retainedEquity" class="text-lg font-bold text-white">$0</p>
+          </div>
+          <div>
+            <p class="text-[10px] text-slate-400 font-semibold">Monthly Passive Cashflow</p>
+            <p id="monthlyCashflow" class="text-lg font-bold text-emerald-400">$0</p>
+          </div>
+          <div>
+            <p class="text-[10px] text-slate-400 font-semibold">Total Project Equity</p>
+            <p id="totalEquity" class="text-lg font-bold text-white">$0</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex justify-between text-[11px] text-slate-400 font-semibold mb-1">
+            <span>Forced Equity Progress</span>
+            <span id="equityBarPct">0%</span>
+          </div>
+          <div class="w-full h-3 rounded-full bg-slate-800/60 overflow-hidden">
+            <div id="equityBar" class="h-full rounded-full bg-gradient-to-r from-emerald-500 to-blue-500 transition-all duration-500" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="copyQuote()" class="btn-primary w-full py-3.5 rounded-2xl text-white font-bold flex items-center justify-center gap-2">
+        <i class="fa-solid fa-message"></i> Copy Quote Summary to SMS
+      </button>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap" class="section-anchor py-8">
+    <h2 class="text-xl font-bold text-white mb-1">2-Phase Growth Roadmap</h2>
+    <p class="text-slate-400 text-xs mb-5">From first deal to full ownership.</p>
+
+    <div class="space-y-4">
+      <div class="glass rounded-2xl p-5 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-20 h-20 bg-blue-500/10 rounded-full -mr-6 -mt-6"></div>
+        <span class="inline-block text-[10px] font-bold uppercase tracking-wide text-blue-300 bg-blue-500/15 px-2 py-1 rounded-full mb-2">Phase 1</span>
+        <h3 class="font-bold text-white mb-2">Shared Holding &mdash; Deals 1 &amp; 2</h3>
+        <ul class="text-sm text-slate-300 space-y-1.5">
+          <li class="flex gap-2"><i class="fa-solid fa-circle-check text-blue-400 mt-1"></i> 100% cost coverage, no capital in</li>
+          <li class="flex gap-2"><i class="fa-solid fa-circle-check text-blue-400 mt-1"></i> Class B non-voting sweat equity units</li>
+          <li class="flex gap-2"><i class="fa-solid fa-circle-check text-blue-400 mt-1"></i> Cash-out at refinance, tax-deferred</li>
+        </ul>
+      </div>
+
+      <div class="glass rounded-2xl p-5 relative overflow-hidden border border-amber-500/30 glow-amber">
+        <div class="absolute top-0 right-0 w-20 h-20 bg-amber-500/10 rounded-full -mr-6 -mt-6"></div>
+        <span class="inline-block text-[10px] font-bold uppercase tracking-wide text-amber-300 bg-amber-500/15 px-2 py-1 rounded-full mb-2">Phase 2</span>
+        <h3 class="font-bold text-white mb-2">Contractor Graduation &mdash; Deal 3+</h3>
+        <ul class="text-sm text-slate-300 space-y-1.5">
+          <li class="flex gap-2"><i class="fa-solid fa-circle-check text-amber-400 mt-1"></i> Contractor Holding Trust established</li>
+          <li class="flex gap-2"><i class="fa-solid fa-circle-check text-amber-400 mt-1"></i> Direct title, name on deed</li>
+          <li class="flex gap-2"><i class="fa-solid fa-circle-check text-amber-400 mt-1"></i> Access to state first-time-owner vouchers</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIABILITY SHIELD -->
+  <section id="structure" class="section-anchor py-8">
+    <h2 class="text-xl font-bold text-white mb-1">Liability Shield &amp; Structure</h2>
+    <p class="text-slate-400 text-xs mb-5">Three tiers keep risk isolated and equity clean.</p>
+
+    <div class="glass rounded-2xl p-5 space-y-3">
+      <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-800/40">
+        <div class="w-9 h-9 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-300 font-bold">1</div>
+        <div>
+          <p class="font-bold text-white text-sm">Parent Holding Trust</p>
+          <p class="text-xs text-slate-400">Master entity governing all Class A/B ownership</p>
+        </div>
+      </div>
+      <div class="flex justify-center"><i class="fa-solid fa-arrow-down text-slate-500"></i></div>
+      <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-800/40">
+        <div class="w-9 h-9 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-300 font-bold">2</div>
+        <div>
+          <p class="font-bold text-white text-sm">Contractor OpCo (S-Corp)</p>
+          <p class="text-xs text-slate-400">Bills labor at-cost, receives Class B equity</p>
+        </div>
+      </div>
+      <div class="flex justify-center"><i class="fa-solid fa-arrow-down text-slate-500"></i></div>
+      <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-800/40">
+        <div class="w-9 h-9 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-300 font-bold">3</div>
+        <div>
+          <p class="font-bold text-white text-sm">Property LLC (PropCo)</p>
+          <p class="text-xs text-slate-400">Holds title to each individual asset, isolates liability</p>
+        </div>
+      </div>
+    </div>
+
+    <button onclick="openModal('cepaModal')" class="mt-4 w-full btn-secondary py-3.5 rounded-2xl text-blue-300 font-bold flex items-center justify-center gap-2">
+      <i class="fa-solid fa-file-contract"></i> View CEPA Terms
+    </button>
+  </section>
+
+  <div class="h-4"></div>
+</main>
+
+<!-- ===================== BOTTOM TAB NAV ===================== -->
+<nav class="fixed bottom-0 inset-x-0 z-40 glass-strong" style="padding-bottom:env(safe-area-inset-bottom)">
+  <div class="max-w-2xl mx-auto grid grid-cols-5">
+    <button class="tab-item active flex flex-col items-center py-2.5 gap-1" onclick="goTo('vsmodel', this)">
+      <i class="tab-icon fa-solid fa-scale-balanced text-slate-400"></i>
+      <span class="tab-label text-[10px] font-semibold text-slate-400">Vs Model</span>
+    </button>
+    <button class="tab-item flex flex-col items-center py-2.5 gap-1" onclick="goTo('proforma', this)">
+      <i class="tab-icon fa-solid fa-calculator text-slate-400"></i>
+      <span class="tab-label text-[10px] font-semibold text-slate-400">Pro-Forma</span>
+    </button>
+    <button class="tab-item flex flex-col items-center py-2.5 gap-1" onclick="goTo('roadmap', this)">
+      <i class="tab-icon fa-solid fa-route text-slate-400"></i>
+      <span class="tab-label text-[10px] font-semibold text-slate-400">Roadmap</span>
+    </button>
+    <button class="tab-item flex flex-col items-center py-2.5 gap-1" onclick="openModal('shareModal')">
+      <i class="tab-icon fa-solid fa-share-nodes text-slate-400"></i>
+      <span class="tab-label text-[10px] font-semibold text-slate-400">Share</span>
+    </button>
+    <button class="tab-item flex flex-col items-center py-2.5 gap-1" onclick="handleInstall()">
+      <i class="tab-icon fa-solid fa-download text-slate-400"></i>
+      <span class="tab-label text-[10px] font-semibold text-slate-400">Install</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===================== SHARE MODAL ===================== -->
+<div id="shareModal" class="fixed inset-0 z-50 hidden items-end justify-center modal-backdrop" onclick="closeModalOnBackdrop(event,'shareModal')">
+  <div class="glass-strong w-full max-w-2xl rounded-t-3xl p-6" style="padding-bottom:calc(env(safe-area-inset-bottom) + 24px)">
+    <div class="w-10 h-1.5 bg-slate-600 rounded-full mx-auto mb-5"></div>
+    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-share-nodes text-emerald-400"></i> Share Pitch</h3>
+    <div class="space-y-3">
+      <button onclick="nativeShare()" class="btn-primary w-full py-4 rounded-2xl text-white font-bold flex items-center justify-center gap-2">
+        <i class="fa-solid fa-paper-plane"></i> Share via Apps
+      </button>
+      <button onclick="copyLink()" class="btn-secondary w-full py-4 rounded-2xl text-blue-300 font-bold flex items-center justify-center gap-2">
+        <i class="fa-solid fa-link"></i> Copy Link
+      </button>
+      <button onclick="openQrModal()" class="btn-secondary w-full py-4 rounded-2xl text-blue-300 font-bold flex items-center justify-center gap-2">
+        <i class="fa-solid fa-qrcode"></i> Show QR Code
+      </button>
+      <button onclick="closeModal('shareModal')" class="w-full py-3 text-slate-400 font-semibold">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== QR MODAL ===================== -->
+<div id="qrModal" class="fixed inset-0 z-50 hidden items-center justify-center modal-backdrop p-6" onclick="closeModalOnBackdrop(event,'qrModal')">
+  <div class="glass-strong w-full max-w-sm rounded-3xl p-6 text-center">
+    <h3 class="text-lg font-bold text-white mb-4">Scan to View Pitch</h3>
+    <div class="bg-white rounded-2xl p-4 inline-block" id="qrcodeContainer"></div>
+    <p class="text-xs text-slate-400 mt-4">Point the contractor's phone camera here</p>
+    <button onclick="closeModal('qrModal')" class="mt-5 w-full btn-primary py-3 rounded-2xl text-white font-bold">Done</button>
+  </div>
+</div>
+
+<!-- ===================== INSTALL MODAL ===================== -->
+<div id="installModal" class="fixed inset-0 z-50 hidden items-end justify-center modal-backdrop" onclick="closeModalOnBackdrop(event,'installModal')">
+  <div class="glass-strong w-full max-w-2xl rounded-t-3xl p-6" style="padding-bottom:calc(env(safe-area-inset-bottom) + 24px)">
+    <div class="w-10 h-1.5 bg-slate-600 rounded-full mx-auto mb-5"></div>
+    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i class="fa-brands fa-apple text-slate-200"></i> Add to Home Screen</h3>
+    <ol class="space-y-3 text-sm text-slate-300">
+      <li class="flex gap-3"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-300 font-bold flex items-center justify-center shrink-0">1</span> Tap the <i class="fa-solid fa-arrow-up-from-bracket mx-1"></i> Share icon in Safari's toolbar.</li>
+      <li class="flex gap-3"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-300 font-bold flex items-center justify-center shrink-0">2</span> Scroll down and tap <strong class="text-white">"Add to Home Screen"</strong>.</li>
+      <li class="flex gap-3"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-300 font-bold flex items-center justify-center shrink-0">3</span> Tap <strong class="text-white">"Add"</strong> in the top-right corner.</li>
+      <li class="flex gap-3"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-300 font-bold flex items-center justify-center shrink-0">4</span> Launch "Equity Flywheel" like any native app.</li>
+    </ol>
+    <button onclick="closeModal('installModal')" class="mt-5 w-full btn-primary py-3.5 rounded-2xl text-white font-bold">Got It</button>
+  </div>
+</div>
+
+<!-- ===================== CEPA MODAL ===================== -->
+<div id="cepaModal" class="fixed inset-0 z-50 hidden items-end justify-center modal-backdrop" onclick="closeModalOnBackdrop(event,'cepaModal')">
+  <div class="glass-strong w-full max-w-2xl rounded-t-3xl p-6 max-h-[85vh] overflow-y-auto" style="padding-bottom:calc(env(safe-area-inset-bottom) + 24px)">
+    <div class="w-10 h-1.5 bg-slate-600 rounded-full mx-auto mb-5"></div>
+    <h3 class="text-lg font-bold text-white mb-1 flex items-center gap-2"><i class="fa-solid fa-file-contract text-emerald-400"></i> CEPA Terms</h3>
+    <p class="text-xs text-slate-400 mb-4">Contractor Equity Participation Agreement &mdash; key points</p>
+    <div class="space-y-3">
+      <div class="rounded-xl bg-slate-800/40 p-3">
+        <p class="font-bold text-white text-sm mb-1"><i class="fa-solid fa-receipt text-blue-400 mr-1"></i> At-Cost Billing</p>
+        <p class="text-xs text-slate-400">Materials &amp; labor invoiced at direct cost only &mdash; no markup, no cash risk to contractor.</p>
+      </div>
+      <div class="rounded-xl bg-slate-800/40 p-3">
+        <p class="font-bold text-white text-sm mb-1"><i class="fa-solid fa-square-root-variable text-blue-400 mr-1"></i> Sweat Equity Formula</p>
+        <p class="text-xs text-slate-400">Forgone labor margin converts 1:1 into equity units at close, valued at ARV-based project equity.</p>
+      </div>
+      <div class="rounded-xl bg-slate-800/40 p-3">
+        <p class="font-bold text-white text-sm mb-1"><i class="fa-solid fa-layer-group text-blue-400 mr-1"></i> Class B Units</p>
+        <p class="text-xs text-slate-400">Non-voting, profit-participating units entitling holder to pro-rata refinance and sale proceeds.</p>
+      </div>
+      <div class="rounded-xl bg-slate-800/40 p-3">
+        <p class="font-bold text-white text-sm mb-1"><i class="fa-solid fa-graduation-cap text-blue-400 mr-1"></i> Graduation Clause</p>
+        <p class="text-xs text-slate-400">After 2 qualifying deals, contractor may elect direct title ownership via Contractor Holding Trust.</p>
+      </div>
+    </div>
+    <button onclick="closeModal('cepaModal')" class="mt-5 w-full btn-primary py-3.5 rounded-2xl text-white font-bold">Close</button>
+  </div>
+</div>
+
+<!-- ===================== TOAST ===================== -->
+<div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 translate-y-24 opacity-0 z-50 glass-strong px-5 py-3 rounded-2xl flex items-center gap-2 pointer-events-none">
+  <i class="fa-solid fa-circle-check text-emerald-400"></i>
+  <span id="toastMsg" class="text-sm font-semibold text-white">Copied!</span>
+</div>
+
+<script>
+  /* ---------- Helpers ---------- */
+  const fmt = n => '$' + Math.round(n).toLocaleString('en-US');
+
+  function step(id, delta){
+    const el = document.getElementById(id);
+    let val = parseInt(el.value) + delta;
+    val = Math.max(parseInt(el.min), Math.min(parseInt(el.max), val));
+    el.value = val;
+    calc();
+  }
+
+  function updateSliderFill(el){
+    const min = parseFloat(el.min), max = parseFloat(el.max), val = parseFloat(el.value);
+    const pct = ((val - min) / (max - min)) * 100;
+    el.style.setProperty('--fill', pct + '%');
+  }
+
+  /* ---------- Pro-forma calculation ---------- */
+  function calc(){
+    const purchasePrice = parseInt(document.getElementById('purchasePrice').value);
+    const rehabCost = parseInt(document.getElementById('rehabCost').value);
+    const arv = parseInt(document.getElementById('arv').value);
+    const equityShare = parseInt(document.getElementById('equityShare').value);
+
+    document.getElementById('purchasePriceLabel').textContent = fmt(purchasePrice);
+    document.getElementById('rehabCostLabel').textContent = fmt(rehabCost);
+    document.getElementById('arvLabel').textContent = fmt(arv);
+    document.getElementById('equityShareLabel').textContent = equityShare + '%';
+
+    [['purchasePrice'], ['rehabCost'], ['arv'], ['equityShare']].forEach(([id]) => {
+      updateSliderFill(document.getElementById(id));
+    });
+
+    // Standard job model: contractor margin ~15% of rehab direct cost
+    const standardMargin = rehabCost * 0.15;
+    const standardAfterTax = standardMargin * 0.70; // ~30% SECA + income tax bite
+
+    // Equity model
+    const totalProjectCost = purchasePrice + rehabCost;
+    const totalEquity = Math.max(arv - totalProjectCost, 0);
+    const contractorEquity = totalEquity * (equityShare / 100);
+
+    // Refinance at 75% LTV of ARV, pay off project cost basis, remainder is cash-out
+    const refiLoanAmount = arv * 0.75;
+    const totalCashOut = Math.max(refiLoanAmount - totalProjectCost, 0);
+    const refiCashOut = totalCashOut * (equityShare / 100);
+
+    const retainedEquity = contractorEquity - refiCashOut > 0 ? contractorEquity - refiCashOut : contractorEquity * 0.5;
+
+    // Passive cashflow: assume 1% rent/month on ARV, 45% expense ratio, minus new debt service (~6% interest-only on refi loan)
+    const monthlyRent = arv * 0.01;
+    const monthlyExpenses = monthlyRent * 0.45;
+    const monthlyDebtService = (refiLoanAmount * 0.065) / 12;
+    const netMonthlyCashflow = Math.max(monthlyRent - monthlyExpenses - monthlyDebtService, 0);
+    const monthlyCashflow = netMonthlyCashflow * (equityShare / 100);
+
+    document.getElementById('standardMargin').textContent = fmt(standardMargin);
+    document.getElementById('standardAfterTax').textContent = fmt(standardAfterTax);
+    document.getElementById('refiCashOut').textContent = fmt(refiCashOut);
+    document.getElementById('retainedEquity').textContent = fmt(retainedEquity);
+    document.getElementById('monthlyCashflow').textContent = fmt(monthlyCashflow) + '/mo';
+    document.getElementById('totalEquity').textContent = fmt(contractorEquity);
+
+    const barPct = Math.min(100, Math.round((contractorEquity / (standardMargin || 1)) * 5));
+    document.getElementById('equityBar').style.width = barPct + '%';
+    document.getElementById('equityBarPct').textContent = barPct + '%';
+
+    window._quoteData = { purchasePrice, rehabCost, arv, equityShare, standardMargin, standardAfterTax, refiCashOut, retainedEquity, monthlyCashflow, contractorEquity };
+  }
+
+  function copyQuote(){
+    const d = window._quoteData;
+    const text =
+`CONTRACTOR EQUITY FLYWHEEL — QUOTE SUMMARY
+Purchase Price: ${fmt(d.purchasePrice)}
+Rehab Cost: ${fmt(d.rehabCost)}
+ARV: ${fmt(d.arv)}
+Your Equity Share: ${d.equityShare}%
+
+Standard Job Margin: ${fmt(d.standardMargin)} (~${fmt(d.standardAfterTax)} after tax)
+
+EQUITY MODEL:
+Refi Cash-Out: ${fmt(d.refiCashOut)}
+Retained Equity: ${fmt(d.retainedEquity)}
+Monthly Passive Cashflow: ${fmt(d.monthlyCashflow)}/mo
+Total Equity Stake: ${fmt(d.contractorEquity)}
+
+Let's build wealth, not just paychecks.`;
+    copyToClipboard(text, 'Quote copied — paste into SMS');
+  }
+
+  /* ---------- Modals ---------- */
+  function openModal(id){
+    const m = document.getElementById(id);
+    m.classList.remove('hidden');
+    m.classList.add('flex');
+  }
+  function closeModal(id){
+    const m = document.getElementById(id);
+    m.classList.add('hidden');
+    m.classList.remove('flex');
+  }
+  function closeModalOnBackdrop(e, id){
+    if(e.target.id === id) closeModal(id);
+  }
+
+  function openQrModal(){
+    closeModal('shareModal');
+    const container = document.getElementById('qrcodeContainer');
+    container.innerHTML = '';
+    new QRCode(container, {
+      text: window.location.href,
+      width: 220,
+      height: 220,
+      colorDark: '#0B132B',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+    openModal('qrModal');
+  }
+
+  /* ---------- Share / Install ---------- */
+  function nativeShare(){
+    if(navigator.share){
+      navigator.share({
+        title: 'Contractor Equity Flywheel Pitch',
+        text: 'Stop trading time for slim margins. Build real estate equity.',
+        url: window.location.href
+      }).then(() => closeModal('shareModal')).catch(() => {});
+    } else {
+      copyLink();
+    }
+  }
+
+  function copyLink(){
+    copyToClipboard(window.location.href, 'Link copied to clipboard');
+    closeModal('shareModal');
+  }
+
+  function copyToClipboard(text, msg){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(() => showToast(msg)).catch(() => fallbackCopy(text, msg));
+    } else {
+      fallbackCopy(text, msg);
+    }
+  }
+
+  function fallbackCopy(text, msg){
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand('copy'); showToast(msg); }catch(e){ showToast('Copy failed'); }
+    document.body.removeChild(ta);
+  }
+
+  function handleInstall(){
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    if(isIOS){
+      openModal('installModal');
+    } else if(window.deferredPrompt){
+      window.deferredPrompt.prompt();
+    } else {
+      openModal('installModal');
+    }
+  }
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    window.deferredPrompt = e;
+  });
+
+  /* ---------- Toast ---------- */
+  let toastTimer;
+  function showToast(msg){
+    const toast = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    toast.style.transform = 'translate(-50%, 0)';
+    toast.style.opacity = '1';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.style.transform = 'translate(-50%, 6rem)';
+      toast.style.opacity = '0';
+    }, 2200);
+  }
+
+  /* ---------- Tab nav ---------- */
+  function goTo(id, btn){
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+    if(btn) btn.classList.add('active');
+  }
+
+  /* ---------- Init ---------- */
+  calc();
+</script>
+</body>
+</html>
