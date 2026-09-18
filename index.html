@@ -1,69 +1,464 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#10251f">
-  <meta name="description" content="A practical contractor pitch for turning covered remodel work into protected real estate equity and recurring cash flow.">
-  <title>Scaffolding & Equity Flywheel | Contractor Partner Brief</title>
-  <style>
-    :root { --ink:#17352b; --paper:#f5f2e9; --cream:#fbfaf6; --lime:#c8e86b; --orange:#ed704b; --muted:#65746d; --line:#d8ddd2; --shadow:0 18px 50px #17352b16; }
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { margin:0; background:var(--paper); color:var(--ink); font-family:Georgia, 'Times New Roman', serif; line-height:1.45; }
-    .wrap { width:min(1160px, calc(100% - 32px)); margin:auto; }
-    header { background:var(--ink); color:var(--cream); padding:18px 0 76px; overflow:hidden; }
-    nav { display:flex; justify-content:space-between; align-items:center; gap:20px; }
-    .brand { color:var(--lime); font:800 12px/1.1 Arial,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
-    nav a { color:#dce8dd; text-decoration:none; font:700 12px Arial,sans-serif; margin-left:20px; }
-    .eyebrow { color:var(--orange); font:800 12px Arial,sans-serif; letter-spacing:.14em; text-transform:uppercase; margin:0 0 16px; }
-    .hero { padding-top:72px; display:grid; grid-template-columns:1.05fr .95fr; gap:60px; align-items:end; }
-    h1,h2,h3,p { margin-top:0; } h1 { font-size:clamp(44px, 7vw, 82px); letter-spacing:-.06em; line-height:.92; max-width:700px; margin-bottom:25px; }
-    h2 { font-size:clamp(30px, 4vw, 52px); letter-spacing:-.045em; line-height:1; margin-bottom:16px; }
-    h3 { font-size:22px; line-height:1.1; margin-bottom:10px; } p { color:var(--muted); font-size:17px; } header p { color:#c6d5ca; max-width:590px; }
-    .hero-figure { border-left:1px solid #b8cfbe55; padding-left:28px; } .hero-figure strong { display:block; color:var(--lime); font-size:54px; line-height:1; letter-spacing:-.05em; } .hero-figure span { color:#c6d5ca; font:700 12px Arial,sans-serif; text-transform:uppercase; letter-spacing:.12em; }
-    .section { padding:88px 0; } .section.alt { background:var(--cream); } .section-head { display:flex; justify-content:space-between; gap:30px; align-items:end; margin-bottom:30px; } .section-head p { max-width:430px; margin:0; }
-    .bridge { background:var(--ink); color:var(--cream); border-radius:4px; padding:8px; box-shadow:var(--shadow); }
-    .bridge-top { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 20px 12px; } .bridge-top h2 { margin:0; font-size:28px; } .mode-label { color:var(--lime); font:800 11px Arial,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
-    .toggle { display:grid; grid-template-columns:1fr 1fr; padding:4px; background:#29453a; border-radius:3px; } .toggle button { min-height:52px; border:0; background:transparent; color:#c9d6cc; padding:12px 14px; font:800 12px Arial,sans-serif; cursor:pointer; } .toggle button.active { background:var(--lime); color:var(--ink); }
-    .compare-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; } .compare-panel { padding:30px; min-height:250px; background:#f4eadd; color:var(--ink); } .compare-panel.solution { background:var(--lime); } .compare-panel h3 { font-size:28px; } .compare-panel ul { margin:20px 0 0; padding:0; list-style:none; } .compare-panel li { padding:10px 0 10px 24px; border-top:1px solid #17352b25; position:relative; font-size:16px; } .compare-panel li::before { content:'+'; position:absolute; left:0; font:bold 18px Arial; color:var(--orange); } .trap li::before { content:'−'; }
-    .kicker { color:var(--orange); font:800 11px Arial,sans-serif; text-transform:uppercase; letter-spacing:.13em; }
-    .calc { display:grid; grid-template-columns:350px 1fr; gap:30px; } .controls,.output { background:var(--cream); border:1px solid var(--line); padding:28px; box-shadow:var(--shadow); } label { display:block; font:800 12px Arial,sans-serif; text-transform:uppercase; letter-spacing:.05em; margin:18px 0 8px; } input[type=number] { width:100%; min-height:48px; border:1px solid #b8c4b7; border-radius:2px; padding:0 12px; background:white; color:var(--ink); font:18px Georgia; } input[type=range] { width:100%; accent-color:var(--orange); min-height:34px; } .range-row { display:flex; justify-content:space-between; color:var(--muted); font:700 13px Arial; }
-    .check { display:flex; gap:10px; align-items:center; margin-top:22px; font:700 13px Arial; } .check input { width:20px; height:20px; accent-color:var(--orange); } .results { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; } .result { padding:18px; background:#edf0e8; border-top:4px solid var(--ink); min-height:130px; } .result.solution { border-color:var(--orange); background:#fff4e9; } .result small { display:block; font:800 11px Arial; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; } .result strong { display:block; font:800 31px Georgia; margin:8px 0; letter-spacing:-.04em; } .result span { color:var(--muted); font-size:13px; } .note { font-size:13px; margin-top:18px; }
-    .opportunity { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; } .opportunity article { padding:24px; border-top:4px solid var(--orange); background:var(--paper); } .opportunity article:nth-child(2) { border-color:var(--lime); } .opportunity article:nth-child(3) { border-color:var(--ink); } .tag { display:inline-block; padding:6px 8px; background:var(--ink); color:var(--lime); font:800 10px Arial; text-transform:uppercase; letter-spacing:.08em; }
-    .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--line); } .step { padding:28px 24px 10px 0; border:0; border-right:1px solid var(--line); margin-right:24px; text-align:left; cursor:pointer; color:var(--ink); background:transparent; font:inherit; } .step:last-child { border:0; margin:0; } .step[aria-selected="true"] { border-top:4px solid var(--orange); padding-top:24px; } .step-num { color:var(--orange); font:800 38px Arial; } .step strong { display:block; font-size:22px; margin:8px 0; }
-    footer { background:var(--ink); color:#c6d5ca; padding:45px 0; } footer strong { color:var(--lime); font-size:24px; } footer p { color:#c6d5ca; max-width:620px; }
-    @media (max-width:760px) { .wrap { width:min(100% - 24px, 600px); } nav a { display:none; } header { padding-bottom:50px; } .hero { display:block; padding-top:55px; } .hero-figure { margin-top:45px; } .section { padding:58px 0; } .section-head { display:block; } .section-head p { margin-top:14px; } .bridge-top { display:block; } .mode-label { display:block; margin-bottom:12px; } .toggle button { min-height:58px; } .compare-grid,.calc,.opportunity,.steps { grid-template-columns:1fr; } .compare-panel { min-height:0; } .controls,.output { padding:22px; } .results { grid-template-columns:1fr 1fr; } .step { border-right:0; border-bottom:1px solid var(--line); margin:0; padding:24px 0; } .step:last-child { border-bottom:0; } }
-    @media (max-width:430px) { h1 { font-size:48px; } .results { grid-template-columns:1fr; } .toggle { grid-template-columns:1fr; } }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="wrap">
-      <nav><div class="brand">Scaffolding + Equity</div><div><a href="#calculator">Calculator</a><a href="#engine">Travis County</a><a href="#structure">Structure</a></div></nav>
-      <div class="hero"><div><p class="eyebrow">A better back-end for the work you already do</p><h1>Stop restarting at zero after every job.</h1><p>You bring the crew, trade skill, and schedule discipline. The flywheel turns that work into covered payroll today, protected real estate equity, and a recurring monthly share tomorrow.</p></div><div class="hero-figure"><strong>15–20%</strong><span>Traditional job margin redirected into Class B equity</span><p>No extra speculation. No second business to run. Your contracting company stays focused on the work.</p></div></div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f2b27" />
+    <meta name="description" content="A mobile-first contractor pitch comparing standard contracting with a restructured flywheel operating model." />
+    <title>Contractor Flywheel | Mobile Pitch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: '#102b28',
+              pine: '#163b37',
+              moss: '#d9f28b',
+              amber: '#f5b057',
+              clay: '#f26b4f',
+              mint: '#d2f2d8',
+              sky: '#7ec9d8',
+              sand: '#f6f0e8',
+              fog: '#eef2ec'
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      :root {
+        --ink: #102b28;
+        --pine: #163b37;
+        --moss: #d9f28b;
+        --amber: #f5b057;
+        --clay: #f26b4f;
+        --mint: #d2f2d8;
+        --sky: #7ec9d8;
+        --sand: #f6f0e8;
+        --fog: #eef2ec;
+        --line: rgba(16, 43, 40, 0.12);
+      }
+
+      * { box-sizing: border-box; }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 1.25rem;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        background: linear-gradient(180deg, #f8f5f0 0%, #f1efe9 100%);
+        color: var(--ink);
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      body, input, button {
+        font-size: 16px;
+      }
+
+      button, input[type="range"], .segmented button {
+        min-height: 48px;
+      }
+
+      button:active, .segmented button:active, input:active, .chip:active {
+        opacity: 0.7;
+        transform: scale(0.98);
+      }
+
+      .safe-top {
+        padding-top: calc(16px + env(safe-area-inset-top));
+      }
+
+      .safe-bottom {
+        padding-bottom: calc(18px + env(safe-area-inset-bottom));
+      }
+
+      .glass {
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+      }
+
+      .mode-card {
+        transition: all 0.2s ease;
+      }
+
+      .slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 8px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--clay) 0%, var(--amber) 100%);
+        outline: none;
+      }
+
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #fff;
+        border: 3px solid var(--ink);
+        box-shadow: 0 6px 18px rgba(16, 43, 40, 0.2);
+        cursor: pointer;
+      }
+
+      .slider::-moz-range-thumb {
+        width: 28px;
+        height: 28px;
+        border: 3px solid var(--ink);
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 6px 18px rgba(16, 43, 40, 0.2);
+        cursor: pointer;
+      }
+
+      .result-card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8f8f6 100%);
+      }
+
+      .panel {
+        display: none;
+      }
+
+      .panel.active {
+        display: block;
+      }
+
+      .shadow-soft {
+        box-shadow: 0 12px 30px rgba(16, 43, 40, 0.08);
+      }
+
+      .tab-button.active {
+        background: var(--ink);
+        color: white;
+      }
+
+      .toggle-button.active {
+        background: var(--moss);
+        color: var(--ink);
+      }
+
+      .standard-mode .standard-card {
+        background: linear-gradient(180deg, rgba(242, 107, 79, 0.12) 0%, #fffaf8 100%);
+        border-color: rgba(242, 107, 79, 0.25);
+      }
+
+      .standard-mode .flywheel-card {
+        background: linear-gradient(180deg, rgba(126, 201, 216, 0.15) 0%, #f4fbfd 100%);
+        border-color: rgba(126, 201, 216, 0.25);
+      }
+
+      .flywheel-mode .standard-card {
+        background: linear-gradient(180deg, rgba(16, 43, 40, 0.04) 0%, #fff 100%);
+      }
+
+      .flywheel-mode .flywheel-card {
+        background: linear-gradient(180deg, rgba(142, 212, 124, 0.18) 0%, #f3ffec 100%);
+        border-color: rgba(105, 164, 82, 0.25);
+      }
+    </style>
+  </head>
+  <body class="standard-mode">
+    <header class="bg-ink text-white safe-top">
+      <div class="mx-auto max-w-5xl px-4 sm:px-5">
+        <div class="flex items-center justify-between gap-4">
+          <div class="text-[10px] font-black uppercase tracking-[0.28em] text-moss">Flywheel Ops</div>
+          <div class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">Austin Remodel</div>
+        </div>
+
+        <div class="pb-6 pt-5">
+          <p class="text-[10px] font-black uppercase tracking-[0.24em] text-amber">Stop restarting at zero</p>
+          <h1 class="mt-3 text-4xl font-black leading-none tracking-[-0.07em] sm:text-5xl">
+            Turn job margin into protected cash flow.
+          </h1>
+          <p class="mt-3 max-w-xl text-sm leading-6 text-slate-200">
+            Standard contracting pays once. Restructured flywheel operations keep the work covered, the equity protected, and the next payout moving.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-5xl px-4 pb-28 sm:px-5">
+      <section class="mt-5">
+        <div class="rounded-[28px] bg-ink p-2 shadow-soft">
+          <div class="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p class="px-2 pt-2 text-[10px] font-black uppercase tracking-[0.22em] text-moss">Operational Toggle</p>
+              <h2 class="px-2 pb-2 text-xl font-black tracking-[-0.05em] text-white">Choose the operating model</h2>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 rounded-2xl bg-[#20463f] p-1.5 md:w-[420px]">
+              <button type="button" data-mode="standard" class="toggle-button active rounded-xl px-4 py-3 text-[11px] font-black uppercase tracking-[0.12em]">
+                Standard Contractor
+              </button>
+              <button type="button" data-mode="flywheel" class="toggle-button rounded-xl px-4 py-3 text-[11px] font-black uppercase tracking-[0.12em]">
+                Flywheel Ops
+              </button>
+            </div>
+          </div>
+
+          <div class="mt-3 grid gap-3 md:grid-cols-2">
+            <article class="standard-card mode-card rounded-[22px] border border-white/10 bg-white/5 p-4">
+              <div class="mb-3 flex items-center gap-2">
+                <span class="inline-flex rounded-full bg-[#f9d1c7] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-[#5f2217]">Red / Amber</span>
+              </div>
+              <p class="text-[10px] font-black uppercase tracking-[0.18em] text-[#f6a26a]">Standard contracting</p>
+              <h3 class="mt-2 text-2xl font-black tracking-[-0.05em] text-ink">Current operations</h3>
+              <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-700">
+                <li class="flex items-start gap-2"><span class="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-[#f26b4f]"></span><span>Taxable income burden on each invoice.</span></li>
+                <li class="flex items-start gap-2"><span class="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-[#f5b057]"></span><span>Client non-payment risk remains on the contractor.</span></li>
+                <li class="flex items-start gap-2"><span class="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-[#f26b4f]"></span><span>Zero recurring cash flow after closeout.</span></li>
+                <li class="flex items-start gap-2"><span class="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-[#f5b057]"></span><span>100% warranty liability sits on your company.</span></li>
+              </ul>
+            </article>
+
+            <article class="flywheel-card mode-card rounded-[22px] border border-white/10 bg-white/5 p-4">
+              <div class="mb-3 flex items-center gap-2">
+                <span class="inline-flex rounded-full bg-[#d9f2d0] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-[#1a4b2c]">Green / Blue</span>
+              </div>
+              <p class="text-[10px] font-black uppercase tracking-[0.18em] text-[#4e9e8d]">Restructured flywheel</p>
+              <h3 class="mt-2 text-2xl font-black tracking-[-0.05em] text-ink">Proposed operations</h3>
+              <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-700">
+                <li class="flex items-start gap-2"><span class="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-[#53ae73]"></span><span>100% covered labor and materials through protected operating structure.</span></li>
+                <li class="flex items-start gap-2"><span class="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-[#7ec9d8]"></span><span>Tax-deferred equity units issued for sweat equity.</span></li>
+                <li class="flex items-start gap-2"><span class="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-[#53ae73]"></span><span>Guaranteed monthly voucher cash flow from stabilized operations.</span></li>
+                <li class="flex items-start gap-2"><span class="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-[#7ec9d8]"></span><span>Segregated asset protection keeps property and operating risk apart.</span></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="calculator" class="mt-8">
+        <div class="mb-3 flex items-end justify-between gap-4">
+          <div>
+            <p class="text-[10px] font-black uppercase tracking-[0.24em] text-[#f26b4f]">Model the shift</p>
+            <h2 class="mt-2 text-3xl font-black tracking-[-0.06em]">Rebuild the economics.</h2>
+          </div>
+        </div>
+
+        <div class="grid gap-4 lg:grid-cols-[320px_minmax(0,1fr)]">
+          <div class="rounded-[24px] border border-slate-200 bg-white p-4 shadow-soft sm:p-5">
+            <h3 class="text-lg font-black tracking-[-0.04em]">Project inputs</h3>
+
+            <div class="mt-5">
+              <div class="mb-2 flex items-center justify-between text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">
+                <span>Direct materials cost</span>
+                <span id="materialsValue">$45,000</span>
+              </div>
+              <input id="materials" class="slider" type="range" min="5000" max="250000" step="1000" value="45000" />
+            </div>
+
+            <div class="mt-6">
+              <div class="mb-2 flex items-center justify-between text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">
+                <span>Crew & labor cost</span>
+                <span id="laborValue">$30,000</span>
+              </div>
+              <input id="labor" class="slider" type="range" min="5000" max="200000" step="1000" value="30000" />
+            </div>
+
+            <div class="mt-6 rounded-2xl bg-sand p-3 text-sm leading-6 text-slate-700">
+              <strong class="block text-base font-black text-ink">Built for iPhone</strong>
+              Controls stay thumb-friendly, tap-active, and readable without Safari zoom.
+            </div>
+          </div>
+
+          <div class="rounded-[24px] border border-slate-200 bg-white p-4 shadow-soft sm:p-5">
+            <div class="grid gap-3 sm:grid-cols-2">
+              <div class="result-card bg-[#fff7f2] p-4">
+                <p class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">Standard profit</p>
+                <p id="standardProfit" class="mt-3 text-3xl font-black tracking-[-0.06em] text-[#c65b2a]">$15,000</p>
+                <p class="mt-2 text-xs leading-5 text-slate-600">Taxable today from the standard job model.</p>
+              </div>
+
+              <div class="result-card bg-[#effef2] p-4">
+                <p class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">Class B equity</p>
+                <p id="classBEquity" class="mt-3 text-3xl font-black tracking-[-0.06em] text-[#1c7d4d]">$12,750</p>
+                <p class="mt-2 text-xs leading-5 text-slate-600">Protected equity earned for the restructured structure.</p>
+              </div>
+
+              <div class="result-card bg-[#f2fbff] p-4 sm:col-span-2">
+                <div class="flex items-center justify-between gap-3">
+                  <p class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">Projected cash-out refinance</p>
+                  <span class="rounded-full bg-[#dff6d8] px-2 py-1 text-[9px] font-black uppercase tracking-[0.2em] text-[#1c7d4d]">12-mo</span>
+                </div>
+                <p id="refiPayout" class="mt-3 text-3xl font-black tracking-[-0.06em] text-[#0e5a4d]">$21,038</p>
+                <p class="mt-2 text-xs leading-5 text-slate-600">Target payout when the refinance is executed and the next capital cycle is funded.</p>
+              </div>
+
+              <div class="result-card bg-[#f7f7ff] p-4 sm:col-span-2">
+                <p class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">Monthly voucher revenue share</p>
+                <p id="monthlyVoucher" class="mt-3 text-3xl font-black tracking-[-0.06em] text-[#233b9b]">$214</p>
+                <p class="mt-2 text-xs leading-5 text-slate-600">Ongoing passive income estimate from stabilized housing operations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="workflow" class="mt-8">
+        <div class="mb-3">
+          <p class="text-[10px] font-black uppercase tracking-[0.24em] text-[#f26b4f]">Workflow</p>
+          <h2 class="mt-2 text-3xl font-black tracking-[-0.06em]">Three-step operating model</h2>
+        </div>
+
+        <div class="rounded-[24px] border border-slate-200 bg-white p-2 shadow-soft">
+          <div class="segmented grid grid-cols-3 gap-2 rounded-2xl bg-sand p-1.5">
+            <button type="button" class="tab-button active rounded-xl px-3 py-3 text-[11px] font-black uppercase tracking-[0.12em]" data-tab="remodel">The Remodel</button>
+            <button type="button" class="tab-button rounded-xl px-3 py-3 text-[11px] font-black uppercase tracking-[0.12em]" data-tab="vouchers">The Vouchers</button>
+            <button type="button" class="tab-button rounded-xl px-3 py-3 text-[11px] font-black uppercase tracking-[0.12em]" data-tab="refinance">The Refinance</button>
+          </div>
+
+          <div class="mt-4">
+            <div class="panel active p-4" data-panel="remodel">
+              <h3 class="text-2xl font-black tracking-[-0.06em] text-ink">The Remodel (At-Cost)</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-700">
+                The contractor covers labor and materials at cost through the operating S-Corp. The Property LLC issues Class B equity equal to the sweat-equity value created by the renovation and the schedule discipline behind it.
+              </p>
+            </div>
+
+            <div class="panel p-4" data-panel="vouchers">
+              <h3 class="text-2xl font-black tracking-[-0.06em] text-ink">The Vouchers (Stabilization)</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-700">
+                The Housing OpCo master-leases the site, captures Travis County and TDCJ voucher streams, and stabilizes revenue through recurring room-based operating distributions that do not depend on one-time retail closings.
+              </p>
+            </div>
+
+            <div class="panel p-4" data-panel="refinance">
+              <h3 class="text-2xl font-black tracking-[-0.06em] text-ink">The Refinance (Payout)</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-700">
+                A commercial cash-out refinance returns the initial capital tax-free, then distributes a cash-out profit to the contractor based on the operating and equity value created during the stabilization period.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="structure" class="mt-8">
+        <div class="mb-3">
+          <p class="text-[10px] font-black uppercase tracking-[0.24em] text-[#f26b4f]">Liability shield</p>
+          <h2 class="mt-2 text-3xl font-black tracking-[-0.06em]">Three protected lanes</h2>
+        </div>
+
+        <div class="grid gap-3 md:grid-cols-3">
+          <article class="rounded-[24px] border border-[#f4d9d0] bg-[#fff8f6] p-4 shadow-soft">
+            <div class="mb-3 inline-flex rounded-full bg-[#f8d9cf] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-[#692918]">Operating S-Corp</div>
+            <h3 class="text-xl font-black tracking-[-0.05em] text-ink">Trade labor and warranties</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-700">Handles permits, payroll, vendor relationships, and construction risk with clear operating boundaries.</p>
+          </article>
+
+          <article class="rounded-[24px] border border-[#d9ebea] bg-[#f5fbfb] p-4 shadow-soft">
+            <div class="mb-3 inline-flex rounded-full bg-[#d9ebea] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-[#163b37]">Property LLC</div>
+            <h3 class="text-xl font-black tracking-[-0.05em] text-ink">Title and equity issuance</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-700">Holds the real estate title and issues Class B equity so the asset remains separate from active operating liability.</p>
+          </article>
+
+          <article class="rounded-[24px] border border-[#dfeef9] bg-[#f7fbff] p-4 shadow-soft">
+            <div class="mb-3 inline-flex rounded-full bg-[#dfeef9] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-[#244a67]">Housing OpCo</div>
+            <h3 class="text-xl font-black tracking-[-0.05em] text-ink">Voucher stream control</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-700">Master-leases the site, manages occupancy and vouchers, and converts stable bed revenue into recurring distributions.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <div class="fixed inset-x-0 bottom-0 z-20 glass safe-bottom border-t border-white/10 bg-[#102b28]/92">
+      <div class="mx-auto flex max-w-5xl gap-3 px-4 py-3 sm:px-5">
+        <button id="shareBtn" type="button" class="flex-1 rounded-xl bg-moss px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] text-ink">Share Brief</button>
+        <button id="bookBtn" type="button" class="flex-1 rounded-xl border border-moss/60 bg-transparent px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] text-white">Book Call</button>
+      </div>
     </div>
-  </header>
 
-  <main>
-    <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">The operating change</p><h2>Same trade. Different finish line.</h2></div><p>Move from taxable margin and client collection risk to a repeatable construction-to-equity system.</p></div>
-      <div class="bridge"><div class="bridge-top"><div><span class="mode-label" id="modeLabel">See the trap</span><h2 id="bridgeTitle">Where the standard job leaves you</h2></div><div class="toggle"><button class="active" data-mode="trap">Current Operations</button><button data-mode="flywheel">Restructured Flywheel</button></div></div><div class="compare-grid"><div class="compare-panel trap"><p class="kicker">Current Operations</p><h3>Paid once. Exposed forever.</h3><ul><li>High taxable margin before every invoice is collected</li><li>Client payment risk sits on your balance sheet</li><li>100% exposure to trade warranties and liability</li><li>Job closes and your recurring cash flow returns to $0</li></ul></div><div class="compare-panel solution"><p class="kicker">Restructured Flywheel</p><h3>Covered work. Owned upside.</h3><ul><li>Remodel at cost with guaranteed labor and materials payroll</li><li>Convert the 15–20% profit margin into Class B non-voting equity</li><li>Housing OpCo captures Travis County voucher revenue</li><li>Tax-deferred cash-out refinance pays the next lump sum</li></ul></div></div></div>
-    </div></section>
+    <script>
+      const body = document.body;
+      const money = (value) => '$' + Math.round(value).toLocaleString('en-US');
 
-    <section class="section alt" id="calculator"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Put your last job through it</p><h2>What does your work produce?</h2></div><p>Use familiar job numbers. The model shows the difference between a standard invoice and a flywheel contribution.</p></div><div class="calc"><div class="controls"><h3>Contractor inputs</h3><label for="materials">Materials cost ($)</label><input id="materials" type="number" value="45000" min="0" step="1000"><label for="labor">Direct trade labor / crew hours ($)</label><input id="labor" type="number" value="30000" min="0" step="1000"><label for="markup">Standard retail markup</label><input id="markup" type="range" value="20" min="5" max="40"><div class="range-row"><span>5%</span><strong id="markupValue">20%</strong><span>40%</span></div><label for="timeline">Expected rehab timeline</label><input id="timeline" type="range" value="6" min="2" max="18"><div class="range-row"><span>2 months</span><strong id="timelineValue">6 months</strong><span>18 months</span></div><label class="check"><input id="arLever" type="checkbox" checked> Factor in accrual accounting A/R leverage</label><p class="note">A/R leverage treats approved, uncollected milestone value as a balance-sheet asset, rather than phantom cash you already owe tax on.</p></div><div class="output"><div class="results"><div class="result"><small>Standard job · billed amount</small><strong id="billed">$90,000</strong><span>Materials + labor + retail markup</span></div><div class="result"><small>Standard job · taxable burden</small><strong id="taxBurden">$12,000</strong><span>Estimated margin before collection</span></div><div class="result"><small>Standard job · post-job wealth</small><strong>$0</strong><span>Once the final check clears, the cycle resets</span></div><div class="result solution"><small>Flywheel · covered costs</small><strong>$0</strong><span>Labor and materials are funded at cost</span></div><div class="result solution"><small>Flywheel · accrued sweat equity</small><strong id="sweat">$15,000</strong><span>Margin redirected to Class B equity</span></div><div class="result solution"><small>Flywheel · monthly cash flow share</small><strong id="monthly">$1,125</strong><span>Illustrative voucher-backed distribution</span></div><div class="result solution"><small>Flywheel · 12-month refinance payout</small><strong id="refi">$22,500</strong><span>Tax-deferred cash-out after stabilization</span></div><div class="result"><small>A/R leverage asset</small><strong id="arValue">$75,000</strong><span id="arLabel">Approved milestone value carried as an asset</span></div></div></div></div></div></section>
+      const materialsInput = document.getElementById('materials');
+      const laborInput = document.getElementById('labor');
 
-    <section class="section" id="engine"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Local yield engine</p><h2>Build where Austin’s demand is already spilling over.</h2></div><p>Travis County creates a practical lane for smaller, repeatable housing facilities with stable institutional demand.</p></div><div class="opportunity"><article><span class="tag">Affordability unlocked</span><h3>One lot. Three to four doors.</h3><p>Use AU and “Missing Middle” density to turn a single-family lot into a compact micro-facility. The right corridor can bypass Austin parking minimums and long site-plan delays.</p></article><article><span class="tag">Guaranteed bed vouchers</span><h3>Revenue that does not depend on walk-ins.</h3><p>TDCJ THAP, Travis County CSCD, and ECHO HUD CoC funds can keep beds occupied and monthly distributions steadier through the cycle.</p></article><article><span class="tag">Sub-market arbitrage</span><h3>Permitting speed is part of the yield.</h3><p>Unincorporated Travis County and ETJ corridors around Del Valle, Manor, and Pflugerville can offer a faster path than Austin proper.</p></article></div></div></section>
+      function updateCalculator() {
+        const materials = Math.max(0, Number(materialsInput.value) || 0);
+        const labor = Math.max(0, Number(laborInput.value) || 0);
+        const totalCost = materials + labor;
+        const standardProfit = totalCost * 0.2;
+        const classBEquity = standardProfit * 0.85;
+        const refiPayout = classBEquity * 1.65;
+        const monthlyVoucher = (refiPayout * 0.17) / 12;
 
-    <section class="section alt" id="structure"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Liability isolation</p><h2>Three entities. One protected flywheel.</h2></div><p>Your contracting company does not need to become the landlord. Each entity has one job and one boundary.</p></div><div class="steps"><article class="step"><span class="step-num">01</span><strong>The Shield · Contracting S-Corp</strong><p>Handles direct trade labor, payroll, contracts, and warranties. It keeps active construction liability away from the real estate equity.</p></article><article class="step"><span class="step-num">02</span><strong>The Asset · Property LLC</strong><p>Holds title to the real estate and issues your Class B non-voting equity. Value accumulates where the property lives.</p></article><article class="step"><span class="step-num">03</span><strong>The Operator · Housing OpCo</strong><p>Master leases the property, interfaces with county and state voucher programs, and pays monthly distributions to the Property LLC.</p></article></div></div></section>
-  </main>
-  <footer><div class="wrap"><strong>Build the first unit. Then let the unit fund the next one.</strong><p>This is an operating framework for discussion with your attorney, CPA, lender, and local housing partners. Economics vary by project, underwriting, program eligibility, and final documents.</p></div></footer>
-  <script>
-    const money = value => '$' + Math.round(value).toLocaleString('en-US');
-    const materials = document.querySelector('#materials'); const labor = document.querySelector('#labor'); const markup = document.querySelector('#markup'); const timeline = document.querySelector('#timeline'); const arLever = document.querySelector('#arLever');
-    function updateCalculator() { const materialValue = Math.max(0, Number(materials.value) || 0); const laborValue = Math.max(0, Number(labor.value) || 0); const markupValue = Number(markup.value); const months = Number(timeline.value); const base = materialValue + laborValue; const billed = base * (1 + markupValue / 100); const margin = billed - base; const sweat = margin * .85; const monthly = sweat * .075; const refi = sweat * 1.5; const ar = arLever.checked ? base : 0; document.querySelector('#markupValue').textContent = markupValue + '%'; document.querySelector('#timelineValue').textContent = months + (months === 1 ? ' month' : ' months'); document.querySelector('#billed').textContent = money(billed); document.querySelector('#taxBurden').textContent = money(margin * .4); document.querySelector('#sweat').textContent = money(sweat); document.querySelector('#monthly').textContent = money(monthly); document.querySelector('#refi').textContent = money(refi); document.querySelector('#arValue').textContent = money(ar); document.querySelector('#arLabel').textContent = arLever.checked ? 'Uncollected milestone value carried as an asset' : 'A/R leverage turned off'; }
-    [materials, labor, markup, timeline, arLever].forEach(control => control.addEventListener('input', updateCalculator)); updateCalculator();
-    document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => { document.querySelectorAll('[data-mode]').forEach(item => item.classList.remove('active')); button.classList.add('active'); const flywheel = button.dataset.mode === 'flywheel'; document.querySelector('#modeLabel').textContent = flywheel ? 'See the solution' : 'See the trap'; document.querySelector('#bridgeTitle').textContent = flywheel ? 'Where the restructured job takes you' : 'Where the standard job leaves you'; document.querySelector('.bridge').dataset.mode = button.dataset.mode; }));
-    document.querySelectorAll('.step').forEach(step => step.addEventListener('click', () => { document.querySelectorAll('.step').forEach(item => item.setAttribute('aria-selected', 'false')); step.setAttribute('aria-selected', 'true'); }));
-  </script>
-</body>
+        document.getElementById('materialsValue').textContent = money(materials);
+        document.getElementById('laborValue').textContent = money(labor);
+        document.getElementById('standardProfit').textContent = money(standardProfit);
+        document.getElementById('classBEquity').textContent = money(classBEquity);
+        document.getElementById('refiPayout').textContent = money(refiPayout);
+        document.getElementById('monthlyVoucher').textContent = money(monthlyVoucher);
+      }
+
+      materialsInput.addEventListener('input', updateCalculator);
+      laborInput.addEventListener('input', updateCalculator);
+      updateCalculator();
+
+      document.querySelectorAll('[data-mode]').forEach((button) => {
+        button.addEventListener('click', () => {
+          document.querySelectorAll('[data-mode]').forEach((item) => item.classList.remove('active'));
+          button.classList.add('active');
+          const mode = button.dataset.mode;
+          body.classList.toggle('standard-mode', mode === 'standard');
+          body.classList.toggle('flywheel-mode', mode === 'flywheel');
+        });
+      });
+
+      document.querySelectorAll('.tab-button').forEach((button) => {
+        button.addEventListener('click', () => {
+          document.querySelectorAll('.tab-button').forEach((item) => item.classList.remove('active'));
+          document.querySelectorAll('.panel').forEach((panel) => panel.classList.remove('active'));
+          button.classList.add('active');
+          const panel = document.querySelector(`[data-panel="${button.dataset.tab}"]`);
+          if (panel) panel.classList.add('active');
+        });
+      });
+
+      const shareBtn = document.getElementById('shareBtn');
+      const bookBtn = document.getElementById('bookBtn');
+
+      shareBtn.addEventListener('click', async () => {
+        const shareData = {
+          title: 'Contractor Flywheel Brief',
+          text: 'Compare standard contracting against a restructured flywheel operating model.',
+          url: window.location.href
+        };
+
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+            return;
+          }
+
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(window.location.href);
+            shareBtn.textContent = 'Link Copied';
+            setTimeout(() => { shareBtn.textContent = 'Share Brief'; }, 1200);
+          }
+        } catch (error) {
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(window.location.href);
+            shareBtn.textContent = 'Link Copied';
+            setTimeout(() => { shareBtn.textContent = 'Share Brief'; }, 1200);
+          }
+        }
+      });
+
+      bookBtn.addEventListener('click', () => {
+        window.location.href = 'mailto:alex@contractingflywheel.com?subject=Contractor%20Flywheel%20Brief';
+      });
+    </script>
+  </body>
 </html>
